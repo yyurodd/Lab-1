@@ -2,24 +2,14 @@
 
 int main() {
     setlocale(0, "");
-    
-    std::cout << "Размер int: " << sizeof(int) << " байта" << std::endl;
-    std::cout << "Размер short int: " << sizeof(short int) << " байта" << std::endl;
-    std::cout << "Размер long int: " << sizeof(long int) << " байта" << std::endl;
-    std::cout << "Размер float: " << sizeof(float) << " байта" << std::endl;
-    std::cout << "Размер double: " << sizeof(double) << " байт" << std::endl;
-    std::cout << "Размер long double: " << sizeof(long double) << " байт" << std::endl;
-    std::cout << "Размер char: " << sizeof(char) << " байт" << std::endl;
-    std::cout << "Размер bool: " << sizeof(bool) << " байт" << std::endl << std::endl;
-    
-
     bool cycle = 1;
     char type;
     while (cycle) {
         do {
-            std::cout << "Введите тип числа, двоичное представление которого нужно. 'i' для типа int, 'f' для типа float: ";
+            std::cout << "Введите тип числа, двоичное представление которого нужно. 'i' для типа int, 'f' для типа float.\n"
+                << "Если вы хотите вывести сколько памяти отводится под различные типы данных - введите 's'. \nВвод: ";
             std::cin >> type;
-        } while (type != 'i' && type != 'f');
+        } while (!type);
         if (type == 'i') {
             int number;
             std::cout << "Введите целое число: ";
@@ -34,10 +24,9 @@ int main() {
                     std::cout << " ";
                 }
             }
-
             std::cout << std::endl;
         }
-        else {
+        else if (type == 'f') {
             std::cout << "Введите вещественное число: ";
             union {
                 int integerA;
@@ -58,8 +47,23 @@ int main() {
             std::cout << std::endl;
 
         }
+        else if (type == 's') {
+            std::cout << "Размер int: " << sizeof(int) << " байта" << std::endl;
+            std::cout << "Размер short int: " << sizeof(short int) << " байта" << std::endl;
+            std::cout << "Размер long int: " << sizeof(long int) << " байта" << std::endl;
+            std::cout << "Размер float: " << sizeof(float) << " байта" << std::endl;
+            std::cout << "Размер double: " << sizeof(double) << " байт" << std::endl;
+            std::cout << "Размер long double: " << sizeof(long double) << " байт" << std::endl;
+            std::cout << "Размер char: " << sizeof(char) << " байт" << std::endl;
+            std::cout << "Размер bool: " << sizeof(bool) << " байт" << std::endl << std::endl;
+        }
+        else {
+            std::cout << "Неверный ввод";
+        }
         std::cout << "\n\nВы хотите повторить? \nВведите '1' если да, иначе '0': ";
         std::cin >> cycle;
     }
     return 0;
 }
+
+
