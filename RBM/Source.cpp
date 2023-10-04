@@ -3,7 +3,7 @@
 int main() {
     setlocale(0, "");
     bool cycle = 1;
-    char type;
+    char type, choice;
     while (cycle) {
         do {
             std::cout << "Введите тип числа, двоичное представление которого нужно. 'i' для типа int, 'f' для типа float.\n"
@@ -11,28 +11,71 @@ int main() {
             std::cin >> type;
         } while (!type);
         if (type == 'i') {
-            int number;
+            int number, copy;
             std::cout << "Введите целое число: ";
             std::cin >> number;
+            copy = number;
             int order = sizeof(int) * 8;
             int mask = 1 << (order - 1);
-
+            const int n = 32;
+            int A[n];
             for (int i = 0; i < order; i++) {
-                std::cout << ((number & mask) ? "1" : "0");
+                std::cout << ((number & mask) ? 1 : 0);
+
                 number <<= 1;
                 if (i == 0 || i % 8 == 7) {
                     std::cout << " ";
                 }
+
+            }
+            std::cout << std::endl;
+            {
+                for (int i = 0; i < order; i++) {
+                    A[i] = ((copy & mask) ? 1 : 0);
+                    copy <<= 1;
+                    
+                }
+
+            }
+            
+            std::cout << "\nВы хотите сдвинуть все биты, равные единице, вправо?\nВведите '1', если да, иначе '0': ";
+            std::cin >> choice;
+            if (choice == '1') {
+                for (int i = 31; i >= 0; i--) {
+
+
+                    if ((A[i] == 1) && (i == 31)) {
+                        A[i] = 0;
+                    }
+                    else if ((A[i] == 1) && (i != 31)) {
+                        A[i + 1] = 1;
+                        A[i] = 0;
+                    }
+
+                }
+                for (int i = 0; i < 32; i++) {
+                    std::cout << A[i];
+                    if (i == 0 || i % 8 == 7) {
+                        std::cout << " ";
+                    }
+                }
+
             }
             std::cout << std::endl;
         }
+        
+
         else if (type == 'f') {
             std::cout << "Введите вещественное число: ";
+            const int n = 32;
+            int A[n];
             union {
                 int integerA;
                 float floatB;
             };
+            int copyA;
             std::cin >> floatB;
+            copyA = integerA;
             int order = sizeof(int) * 8;
             int mask = 1 << (order - 1);
 
@@ -42,6 +85,39 @@ int main() {
                 if (i == 0 || i == 8) {
                     std::cout << " ";
                 }
+            }
+            std::cout << std::endl;
+            {
+                for (int i = 0; i < order; i++) {
+                    A[i] = ((copyA & mask) ? 1 : 0);
+                    copyA <<= 1;
+
+                }
+
+            }
+
+            std::cout << "\nВы хотите сдвинуть все биты, равные единице, вправо?\nВведите '1', если да, иначе '0': ";
+            std::cin >> choice;
+            if (choice == '1') {
+                for (int i = 31; i >= 0; i--) {
+
+
+                    if ((A[i] == 1) && (i == 31)) {
+                        A[i] = 0;
+                    }
+                    else if ((A[i] == 1) && (i != 31)) {
+                        A[i + 1] = 1;
+                        A[i] = 0;
+                    }
+
+                }
+                for (int i = 0; i < 32; i++) {
+                    std::cout << A[i];
+                    if (i == 0 || i == 8) {
+                        std::cout << " ";
+                    }
+                }
+
             }
 
             std::cout << std::endl;
@@ -65,5 +141,4 @@ int main() {
     }
     return 0;
 }
-
 
