@@ -17,8 +17,6 @@ int main() {
             copy = number;
             int order = sizeof(int) * 8;
             int mask = 1 << (order - 1);
-            const int n = sizeof(int) * 8;
-            int A[n];
             std::cout << "Двоичное представление: ";
             for (int i = 0; i < order; i++) {
 
@@ -54,8 +52,6 @@ int main() {
 
         else if (type == 'f') {
             std::cout << "Введите вещественное число: ";
-            const int n = sizeof(int) * 8;
-            int A[n];
             union {
                 int integerA;
                 float floatB;
