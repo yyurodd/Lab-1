@@ -17,9 +17,11 @@ int main() {
             copy = number;
             int order = sizeof(int) * 8;
             int mask = 1 << (order - 1);
-            const int n = 32;
+            const int n = sizeof(int) * 8;
             int A[n];
+            std::cout << "Двоичное представление: ";
             for (int i = 0; i < order; i++) {
+
                 std::cout << ((number & mask) ? 1 : 0);
 
                 number <<= 1;
@@ -29,7 +31,7 @@ int main() {
 
             }
             std::cout << std::endl;
-            {
+            {//idz for int start
                 for (int i = 0; i < order; i++) {
                     A[i] = ((copy & mask) ? 1 : 0);
                     copy <<= 1;
@@ -60,14 +62,14 @@ int main() {
                     }
                 }
 
-            }
+            }//idz for int end
             std::cout << std::endl;
         }
         
 
         else if (type == 'f') {
             std::cout << "Введите вещественное число: ";
-            const int n = 32;
+            const int n = sizeof(int) * 8;
             int A[n];
             union {
                 int integerA;
@@ -78,7 +80,7 @@ int main() {
             copyA = integerA;
             int order = sizeof(int) * 8;
             int mask = 1 << (order - 1);
-
+            std::cout << "Двоичное представление: ";
             for (int i = 0; i < order; i++) {
                 std::cout << ((integerA & mask) ? "1" : "0");
                 integerA <<= 1;
@@ -87,7 +89,7 @@ int main() {
                 }
             }
             std::cout << std::endl;
-            {
+            {//idz for float start
                 for (int i = 0; i < order; i++) {
                     A[i] = ((copyA & mask) ? 1 : 0);
                     copyA <<= 1;
@@ -118,7 +120,7 @@ int main() {
                     }
                 }
 
-            }
+            }//idz for float end
 
             std::cout << std::endl;
 
