@@ -31,36 +31,21 @@ int main() {
 
             }
             std::cout << std::endl;
-            {//idz for int start
-                for (int i = 0; i < order; i++) {
-                    A[i] = ((copy & mask) ? 1 : 0);
-                    copy <<= 1;
-                    
-                }
-
-            }
             
+            //idz for int start
             std::cout << "\nВы хотите сдвинуть все биты, равные единице, вправо?\nВведите '1', если да, иначе '0': ";
             std::cin >> choice;
             if (choice == '1') {
-                for (int i = 31; i >= 0; i--) {
-
-
-                    if ((A[i] == 1) && (i == 31)) {
-                        A[i] = 0;
-                    }
-                    else if ((A[i] == 1) && (i != 31)) {
-                        A[i + 1] = 1;
-                        A[i] = 0;
-                    }
-
-                }
-                for (int i = 0; i < 32; i++) {
-                    std::cout << A[i];
+                copy >>= 1;
+                std::cout << "\nЧисло после смещения: " << copy << "\n";
+                for (int i = 0; i < order; i++) {
+                    std::cout << ((copy & mask) ? 1 : 0);
+                    copy <<= 1;
                     if (i == 0 || i % 8 == 7) {
                         std::cout << " ";
                     }
                 }
+
 
             }//idz for int end
             std::cout << std::endl;
@@ -75,7 +60,11 @@ int main() {
                 int integerA;
                 float floatB;
             };
-            int copyA;
+            union {
+                int copyA;
+                float copyFloat;
+            };
+            
             std::cin >> floatB;
             copyA = integerA;
             int order = sizeof(int) * 8;
@@ -89,32 +78,17 @@ int main() {
                 }
             }
             std::cout << std::endl;
-            {//idz for float start
-                for (int i = 0; i < order; i++) {
-                    A[i] = ((copyA & mask) ? 1 : 0);
-                    copyA <<= 1;
-
-                }
-
-            }
-
+            
+            //idz for float start
             std::cout << "\nВы хотите сдвинуть все биты, равные единице, вправо?\nВведите '1', если да, иначе '0': ";
             std::cin >> choice;
             if (choice == '1') {
-                for (int i = 31; i >= 0; i--) {
-
-
-                    if ((A[i] == 1) && (i == 31)) {
-                        A[i] = 0;
-                    }
-                    else if ((A[i] == 1) && (i != 31)) {
-                        A[i + 1] = 1;
-                        A[i] = 0;
-                    }
-
-                }
-                for (int i = 0; i < 32; i++) {
-                    std::cout << A[i];
+                
+                copyA >>= 1;
+                std::cout << "\nЧисло после смещения: " << copyFloat << "\n";
+                for (int i = 0; i < order; i++) {
+                    std::cout << ((copyA & mask) ? 1 : 0);
+                    copyA <<= 1;
                     if (i == 0 || i == 8) {
                         std::cout << " ";
                     }
